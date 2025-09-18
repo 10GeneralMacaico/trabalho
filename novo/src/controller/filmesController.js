@@ -1,4 +1,4 @@
-    import * as filme from "../repository/filmesRepository.js";
+import * as filme from "../repository/filmesRepository.js";
 import { Router } from 'express';
 
 const endpoints = Router();
@@ -9,7 +9,7 @@ endpoints.get('/filmes', async (req, resp) => {
 })
 
 endpoints.post('/filmes/enviar', async (req, resp) => {
-    let novo = req.body; // {titulo, ano, genero, diretor, avaliacao}
+    let novo = req.body;
     let id = await filme.inserirFilmes(novo);
     resp.send({ novoI: id });
 })
