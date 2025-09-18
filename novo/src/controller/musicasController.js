@@ -9,7 +9,7 @@ endpoints.get('/musicas', async (req, resp) => {
 })
 
 endpoints.post('/musicas/enviar', async (req, resp) => {
-    let novo = req.body; // {titulo, artista, album, ano, genero}
+    let novo = req.body;
     let id = await musica.inserirMusicas(novo);
     resp.send({ novoI: id });
 })
@@ -34,3 +34,4 @@ endpoints.get('/musicas/:id', async (req, resp) => {
 })
 
 export default endpoints;
+
