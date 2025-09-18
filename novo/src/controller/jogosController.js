@@ -9,7 +9,7 @@ endpoints.get('/jogos', async (req, resp) => {
 })
 
 endpoints.post('/jogos/enviar', async (req, resp) => {
-    let novo = req.body; // {titulo, genero, plataforma, ano}
+    let novo = req.body;
     let id = await jogo.inserirJogos(novo);
     resp.send({ novoI: id });
 })
@@ -34,3 +34,4 @@ endpoints.get('/jogos/:id', async (req, resp) => {
 })
 
 export default endpoints;
+
