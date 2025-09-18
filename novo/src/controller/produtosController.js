@@ -9,7 +9,7 @@ endpoints.get('/produtos', async (req, resp) => {
 })
 
 endpoints.post('/produtos/enviar', async (req, resp) => {
-    let novo = req.body; // {nome, preco}
+    let novo = req.body;
     let id = await produto.inserirProdutos(novo);
     resp.send({ novoI: id });
 })
@@ -34,3 +34,4 @@ endpoints.get('/produtos/:id', async (req, resp) => {
 })
 
 export default endpoints;
+
