@@ -9,7 +9,7 @@ endpoints.get('/series', async (req, resp) => {
 })
 
 endpoints.post('/series/enviar', async (req, resp) => {
-    let novo = req.body; // {titulo, ano_lancamento, genero, temporadas, criador, avaliacao}
+    let novo = req.body;
     let id = await serie.inserirSeries(novo);
     resp.send({ novoI: id });
 })
@@ -34,3 +34,4 @@ endpoints.get('/series/:id', async (req, resp) => {
 })
 
 export default endpoints;
+
