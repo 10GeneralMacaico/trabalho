@@ -9,7 +9,7 @@ endpoints.get('/usuarios', async (req, resp) => {
 })
 
 endpoints.post('/usuarios/enviar', async (req, resp) => {
-    let novo = req.body; // {nome, senha, email}
+    let novo = req.body;
     let id = await usuario.inserirUsuarios(novo);
     resp.send({ novoI: id });
 })
@@ -34,3 +34,4 @@ endpoints.get('/usuarios/:id', async (req, resp) => {
 })
 
 export default endpoints;
+
