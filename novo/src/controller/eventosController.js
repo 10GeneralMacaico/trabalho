@@ -1,29 +1,35 @@
-import * as carro from "../repository/eventosRepository.js";
+import * as event from "../repository/eventosRepository.js";
 import { Router } from 'express';
 
 const endpoints = Router();
 
 endpoints.get('/evento', async (req, resp) => {
-    let registros = await carro.pesquisarEvento();
+    let registros = await event.pesquisarEvento();
     resp.send(registros);
+})
+
+endpoints.get('/evento/filtro', async (req, resp) => {
+  let nome = req.query.nome;
+  let registros = await event.filtrarPorNomeE(nome);
+  resp.send(registros);
 })
 
 endpoints.post('/evento/enviar', async (req, resp) => {
     let novo = req.body;
-    let id = await carro.inserirEvento(novo);
+    let id = await event.inserirEvento(novo);
     resp.send({ novoI: id });
 })
 
 endpoints.put('/evento/alt/:id', async (req, resp) => {
     let id = Number(req.params.id);
     let novo = req.body;
-    await carro.alterarEvento(id, novo);
+    await event.alterarEvento(id, novo);
     resp.send();
 })
 
 endpoints.delete('/evento/del/:id', async (req, resp) => {
     let id = Number(req.params.id);
-    await carro.deletarEvento(id);
+    await event.deletarEvento(id);
     resp.send();
 })
 
@@ -34,3 +40,4 @@ endpoints.get('/evento/:id', async (req, resp) => {
 })
 
 export default endpoints;
+
