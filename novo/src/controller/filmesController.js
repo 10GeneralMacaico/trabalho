@@ -8,6 +8,12 @@ endpoints.get('/filmes', async (req, resp) => {
     resp.send(registros);
 })
 
+endpoints.get('/filmes/filtro', async (req, resp) => {
+  let nome = req.query.nome;
+  let registros = await filme.filtrarPorNomeF(nome);
+  resp.send(registros);
+})
+
 endpoints.post('/filmes/enviar', async (req, resp) => {
     let novo = req.body;
     let id = await filme.inserirFilmes(novo);
