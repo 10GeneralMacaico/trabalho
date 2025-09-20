@@ -7,6 +7,7 @@ import clientes from '';
 import filmes from '';
 import series from '';
 import produtos from '';
+import musicas from '';
 
 
 export function AddRotas(api){
@@ -19,4 +20,6 @@ export function AddRotas(api){
   api.use(filmes);
   api.use(series);
   api.use(produtos);
+  api.use(musicas);
 }
+
