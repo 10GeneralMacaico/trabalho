@@ -1,13 +1,13 @@
-import eventos from './Controller/eventosController.js';
-import hoteis from '';
-import jogos from '';
-import usuarios from '';
-import pedidos from '';
-import clientes from '';
-import filmes from '';
-import series from '';
-import produtos from '';
-import musicas from '';
+import eventos from './controller/eventosController.js';
+import hoteis from './controller/hoteisController.js';
+import jogos from './controller/jogosController.js';
+import usuarios from './controller/usuariosController.js';
+import pedidos from './controller/pedidosController.js';
+import clientes from './controller/clientesController.js';
+import filmes from './controller/filmesController.js';
+import series from './controller/seriesController.js';
+import produtos from './controller/produtosController.js';
+import musicas from './controller/musicasController.js';
 
 
 export function AddRotas(api){
@@ -22,5 +22,6 @@ export function AddRotas(api){
   api.use(produtos);
   api.use(musicas);
 }
+
 
 
