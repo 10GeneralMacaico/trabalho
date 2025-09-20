@@ -1,4 +1,4 @@
-import eventos from '';
+import eventos from './Controller/eventosController.js';
 import hoteis from '';
 import jogos from '';
 import usuarios from '';
@@ -22,4 +22,5 @@ export function AddRotas(api){
   api.use(produtos);
   api.use(musicas);
 }
+
 
