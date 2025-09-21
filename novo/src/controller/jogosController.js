@@ -8,6 +8,12 @@ endpoints.get('/jogos', async (req, resp) => {
     resp.send(registros);
 })
 
+endpoints.get('/jogos/filtro', async (req, resp) => {
+  let nome = req.query.nome;
+  let registros = await jogo.filtrarPorNomeJ(nome);
+  resp.send(registros);
+})
+
 endpoints.post('/jogos/enviar', async (req, resp) => {
     let novo = req.body;
     let id = await jogo.inserirJogos(novo);
@@ -34,4 +40,5 @@ endpoints.get('/jogos/:id', async (req, resp) => {
 })
 
 export default endpoints;
+
 
