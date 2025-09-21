@@ -46,7 +46,9 @@ export async function alterarJogos(id, novo) {
 export async function pesquisarJogosId(id) {
   const Or = `
   select *from jogos
+    where id = ?
   `
   const [registro] = await conection.query(Or, [id]);
   return registro;
 }
+
