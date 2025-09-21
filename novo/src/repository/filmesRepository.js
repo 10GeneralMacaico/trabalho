@@ -1,4 +1,4 @@
-import conection from "./connection.js";
+import conection from "./conection.js";
 
 export async function pesquisarFilmes() {
   const Or = `
@@ -42,3 +42,4 @@ export async function pesquisarFilmesId(id) {
   const [registro] = await conection.query("SELECT * FROM filmes WHERE id=?", [id]);
   return registro;
 }
+
