@@ -8,10 +8,21 @@ export async function pesquisarFilmes() {
   return registro;
 }
 
+export async function filtrarPorNomeF(nome) {
+  const Or = `
+    select *
+      from cliente
+     where nome like ? 
+  `
+
+  const [registros] = await conection.query(Or, ['%'+nome+'%'])
+  return registros;
+}
+
 export async function inserirFilmes(novo) {
   const Or = `
-    INSERT INTO filmes (titulo, diretor, genero, duracao, ano_lancamento, classificacao, bilheteria, descricao, criado_em, atualizado_em)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    insert into filmes (titulo, diretor, genero, duracao, ano_lancamento, classificacao, bilheteria, descricao, criado_em, atualizado_em)
+    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
   const [info] = await conection.query(Or, Object.values(novo));
   return info.insertId;
@@ -42,4 +53,5 @@ export async function pesquisarFilmesId(id) {
   const [registro] = await conection.query("SELECT * FROM filmes WHERE id=?", [id]);
   return registro;
 }
+
 
