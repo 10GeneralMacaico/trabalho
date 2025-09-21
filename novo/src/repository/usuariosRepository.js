@@ -8,6 +8,17 @@ export async function pesquisarUsuarios() {
   return registro;
 }
 
+export async function filtrarPorNomeU(nome) {
+  const Or = `
+    select *
+      from usuarios
+     where nome like ? 
+  `
+  const [registros] = await conection.query(Or, ['%'+nome+'%'])
+  return registros;
+}
+
+
 export async function inserirUsuarios(novo) {
   const ordem = `
     insert into usuarios (nome, email, senha, telefone, endereco, data_nascimento, criado_em, atualizado_em)
@@ -49,3 +60,4 @@ export async function pesquisarUsuariosId(id) {
   const [registro] = await conection.query(Or, [id]);
   return registro;
 }
+
