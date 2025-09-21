@@ -8,6 +8,17 @@ export async function pesquisarSeries() {
   return registro;
 }
 
+export async function filtrarPorNomeS(nome) {
+  const Or = `
+    select *
+      from series
+     where nome like ? 
+  `
+  const [registros] = await conection.query(Or, ['%'+nome+'%'])
+  return registros;
+}
+
+
 export async function inserirSeries(novo) {
   const ordem = `
     insert into series (titulo, genero, temporadas, episodios, ano_inicio, ano_fim, classificacao, descricao, criado_em, atualizado_em)
@@ -51,3 +62,4 @@ export async function pesquisarSeriesId(id) {
   const [registro] = await conection.query(Or, [id]);
   return registro;
 }
+
