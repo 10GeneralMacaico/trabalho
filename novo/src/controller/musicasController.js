@@ -8,6 +8,12 @@ endpoints.get('/musicas', async (req, resp) => {
     resp.send(registros);
 })
 
+endpoints.get('/musicas/filtro', async (req, resp) => {
+  let nome = req.query.nome;
+  let registros = await musica.filtrarPorNomeM(nome);
+  resp.send(registros);
+})
+
 endpoints.post('/musicas/enviar', async (req, resp) => {
     let novo = req.body;
     let id = await musica.inserirMusicas(novo);
@@ -34,4 +40,5 @@ endpoints.get('/musicas/:id', async (req, resp) => {
 })
 
 export default endpoints;
+
 
