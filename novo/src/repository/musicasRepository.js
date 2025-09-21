@@ -8,6 +8,17 @@ export async function pesquisarMusicas() {
   return registro;
 }
 
+export async function filtrarPorNomeM(nome) {
+  const Or = `
+    select *
+      from musicas
+     where nome like ? 
+  `
+  const [registros] = await conection.query(Or, ['%'+nome+'%'])
+  return registros;
+}
+
+
 export async function inserirMusicas(novo) {
   const ordem = `
     insert into musicas (titulo, artista, album, genero, duracao, ano_lancamento, gravadora, preco, criado_em, atualizado_em)
@@ -51,3 +62,4 @@ export async function pesquisarMusicasId(id) {
   const [registro] = await conection.query(Or, [id]);
   return registro;
 }
+
