@@ -8,6 +8,12 @@ endpoints.get('/produtos', async (req, resp) => {
     resp.send(registros);
 })
 
+endpoints.get('/produtos/filtro', async (req, resp) => {
+  let nome = req.query.nome;
+  let registros = await produto.filtrarPorNomeP(nome);
+  resp.send(registros);
+})
+
 endpoints.post('/produtos/enviar', async (req, resp) => {
     let novo = req.body;
     let id = await produto.inserirProdutos(novo);
@@ -34,4 +40,5 @@ endpoints.get('/produtos/:id', async (req, resp) => {
 })
 
 export default endpoints;
+
 
