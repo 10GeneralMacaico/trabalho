@@ -8,6 +8,12 @@ endpoints.get('/series', async (req, resp) => {
     resp.send(registros);
 })
 
+endpoints.get('/series/filtro', async (req, resp) => {
+  let nome = req.query.nome;
+  let registros = await serie.filtrarPorNomeS(nome);
+  resp.send(registros);
+})
+
 endpoints.post('/series/enviar', async (req, resp) => {
     let novo = req.body;
     let id = await serie.inserirSeries(novo);
@@ -34,4 +40,5 @@ endpoints.get('/series/:id', async (req, resp) => {
 })
 
 export default endpoints;
+
 
