@@ -1,6 +1,6 @@
 import conection from "./connection.js";
 
-export async function pesquisarLivros() {
+export async function pesquisarHoteis() {
   const Or =`
   select *from hoteis
   `
@@ -8,7 +8,18 @@ export async function pesquisarLivros() {
   return registro;
 }
 
-export async function inserirLivros(novo) {
+export async function filtrarPorNomeH(nome) {
+  const Or = `
+    select *
+      from hoteis
+     where nome like ? 
+  `
+
+  const [registros] = await conection.query(Or, ['%'+nome+'%'])
+  return registros;
+}
+
+export async function inserirHoteis(novo) {
   const ordem = `
     insert into hoteis (numero, nome, diaria)
     values (?, ?, ?)
@@ -17,7 +28,7 @@ export async function inserirLivros(novo) {
   return info.insertId;
 }
 
-export async function deletarLivros(id) {
+export async function deletarHoteis(id) {
   const Or =`
   delete from hoteis
    where id =?
@@ -25,7 +36,7 @@ export async function deletarLivros(id) {
   await conection.query(Or, [id]);
 }
 
-export async function alterarLivros(id, novo) {
+export async function alterarHoteis(id, novo) {
   const ordem = `
     update hoteis
       set numero=?, 
@@ -36,7 +47,7 @@ export async function alterarLivros(id, novo) {
   await conection.query(ordem, [...Object.values(novo), id]);
 }
 
-export async function pesquisarLivrosId(id) {
+export async function pesquisarHoteisId(id) {
   const Or =`
   select *from hoteis
    where id=?
@@ -44,3 +55,4 @@ export async function pesquisarLivrosId(id) {
   const [registro] = await conection.query(Or, [id]);
   return registro;
 }
+
