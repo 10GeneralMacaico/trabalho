@@ -39,5 +39,30 @@ endpoints.get('/evento/:id', async (req, resp) => {
     resp.send(novo);
 })
 
-export default endpoints;
+endpoints.put('/evento/:id', async (req, resp) => {
+    let id = Number(req.params.id);
+    let dados = req.body;
+    await cliente.alterarClientes(id, dados);
+    resp.status(200).json({ mensagem: "Cliente atualizado com sucesso", id, dados });
+})
 
+endpoints.delete('/evento/:id', async (req, resp) => {
+    let id = Number(req.params.id);
+    await cliente.deletarClientes(id);
+    resp.status(200).json({ mensagem: "Cliente removido", id });
+})
+
+endpoints.get('/evento/:id', async (req, resp) => {
+    let id = Number(req.params.id);
+    let clienteId = await cliente.pesquisarClientesId(id);
+    resp.status(200).json({ mensagem: "Busca concluída", resultado: clienteId });
+})
+
+endpoints.get('/evento/filtros', async (req, resp) => {
+    let nome = req.query.nome;
+    let registros = await cliente.filtrarPorNomeC(nome);
+    resp.status(200).json({ filtro: nome, total: registros.length, dados: registros });
+})
+
+
+export default endpoints;
