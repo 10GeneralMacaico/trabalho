@@ -8,7 +8,7 @@ export async function pesquisarClientes() {
   return registro;
 }
 
-export async function filtrarPorNomeC(nome) {
+export async function filtrarPorNomePD(nome) {
   const Or = `
     select *
       from pedidos
@@ -55,3 +55,4 @@ export async function pesquisarClientesId(id) {
   const [registro] = await conection.query(Or, [id]);
   return registro;
 }
+
