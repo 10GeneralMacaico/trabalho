@@ -1,4 +1,4 @@
-import conection from "./connection.js";
+9import conection from "./connection.js";
 
 export async function pesquisarEventos() {
   const Or =`
@@ -6,6 +6,17 @@ export async function pesquisarEventos() {
   `
   const [registro] = await conection.query(Or);
   return registro;
+}
+
+export async function filtrarPorNomeE(nome) {
+  const Or = `
+    select *
+      from eventos
+     where nome like ? 
+  `
+
+  const [registros] = await conection.query(Or, ['%'+nome+'%'])
+  return registros;
 }
 
 export async function inserirEventos(novo) {
@@ -51,3 +62,4 @@ export async function pesquisarEventosId(id) {
   const [registro] = await conection.query(Or, [id]);
   return registro;
 }
+
