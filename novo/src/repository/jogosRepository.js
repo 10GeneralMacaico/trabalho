@@ -8,9 +8,20 @@ export async function pesquisarJogos() {
   return registro;
 }
 
+export async function filtrarPorNomeJ(nome) {
+  const Or = `
+    select *
+      from jogos
+     where nome like ? 
+  `
+
+  const [registros] = await conection.query(Or, ['%'+nome+'%'])
+  return registros;
+}
+
 export async function inserirJogos(novo) {
   const ordem = `
-    insert intojogos (titulo, genero, plataforma, desenvolvedora, ano_lancamento, classificacao, preco, descricao, criado_em, atualizado_em)
+    insert into jogos (titulo, genero, plataforma, desenvolvedora, ano_lancamento, classificacao, preco, descricao, criado_em, atualizado_em)
     values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
   const [info] = await conection.query(ordem, Object.values(novo));
@@ -51,4 +62,5 @@ export async function pesquisarJogosId(id) {
   const [registro] = await conection.query(Or, [id]);
   return registro;
 }
+
 
