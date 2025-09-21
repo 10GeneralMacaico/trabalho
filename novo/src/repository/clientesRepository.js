@@ -1,4 +1,4 @@
-import conection from "./connection.js";
+import conection from "./conection.js";
 
 export async function pesquisarClientes() {
   const Or =`
@@ -57,4 +57,5 @@ export async function pesquisarClientesId(id) {
   const [registro] = await conection.query(Or, [id]);
   return registro;
 }
+
 
