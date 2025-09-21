@@ -8,6 +8,17 @@ export async function pesquisarProdutos() {
   return registro;
 }
 
+export async function filtrarPorNomeP(nome) {
+  const Or = `
+    select *
+      from produtos
+     where nome like ? 
+  `
+  const [registros] = await conection.query(Or, ['%'+nome+'%'])
+  return registros;
+}
+
+
 export async function inserirProdutos(novo) {
   const ordem = `
     insert into produtos (nome, categoria, marca, preco, estoque, descricao, criado_em, atualizado_em)
@@ -49,3 +60,4 @@ export async function pesquisarProdutosId(id) {
   const [registro] = await conection.query(Or, [id]);
   return registro;
 }
+
