@@ -8,12 +8,23 @@ export async function pesquisarClientes() {
   return registro;
 }
 
+export async function filtrarPorNomeC(nome) {
+  const Or = `
+    SELECT *
+      FROM cliente
+     WHERE nome like ? 
+  `
+
+  const [registros] = await conection.query(Or, ['%'+nome+'%'])
+  return registros;
+}
+
 export async function inserirClientes(novo) {
-  const ordem = `
+  const Or = `
     INSERT INTO clientes (nome, cpf, telefone, trabalho, produto_comprado)
     VALUES (?, ?, ?, ?, ?,?)
   `;
-  const [info] = await conection.query(ordem, Object.values(novo));
+  const [info] = await conection.query(Or, Object.values(novo));
   return info.insertId;
 }
 
@@ -26,7 +37,7 @@ export async function deletarClientes(id) {
 }
 
 export async function alterarClientes(id, novo) {
-  const ordem = `
+  const Or = `
     update clientes
     SET nome =?, 
         cpf =?, 
@@ -35,7 +46,7 @@ export async function alterarClientes(id, novo) {
         produto_comprado =?
     WHERE id=?
   `;
-  await conection.query(ordem, [...Object.values(novo), id]);
+  await conection.query(Or, [...Object.values(novo), id]);
 }
 
 export async function pesquisarClientesId(id) {
@@ -46,3 +57,4 @@ export async function pesquisarClientesId(id) {
   const [registro] = await conection.query(Or, [id]);
   return registro;
 }
+
