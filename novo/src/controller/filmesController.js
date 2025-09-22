@@ -42,25 +42,25 @@ endpoints.get('/filmes/:id', async (req, resp) => {
 endpoints.put('/filmes/:id', async (req, resp) => {
     let id = Number(req.params.id);
     let dados = req.body;
-    await cliente.alterarClientes(id, dados);
+    await cliente.alterarFilmes(id, dados);
     resp.status(200).json({ mensagem: "Cliente atualizado com sucesso", id, dados });
 })
 
 endpoints.delete('/filmes/:id', async (req, resp) => {
     let id = Number(req.params.id);
-    await cliente.deletarClientes(id);
+    await cliente.deletarFilmes(id);
     resp.status(200).json({ mensagem: "Cliente removido", id });
 })
 
 endpoints.get('/filmes/:id', async (req, resp) => {
     let id = Number(req.params.id);
-    let clienteId = await cliente.pesquisarClientesId(id);
+    let clienteId = await cliente.pesquisarFilmesId(id);
     resp.status(200).json({ mensagem: "Busca concluída", resultado: clienteId });
 })
 
 endpoints.get('/filmes/filtros', async (req, resp) => {
     let nome = req.query.nome;
-    let registros = await cliente.filtrarPorNomeC(nome);
+    let registros = await cliente.filtrarPorNomeF(nome);
     resp.status(200).json({ filtro: nome, total: registros.length, dados: registros });
 })
 
