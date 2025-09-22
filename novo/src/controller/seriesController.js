@@ -39,6 +39,29 @@ endpoints.get('/series/:id', async (req, resp) => {
     resp.send(novo);
 })
 
+endpoints.put('/series/:id', async (req, resp) => {
+    let id = Number(req.params.id);
+    let dados = req.body;
+    await cliente.alterarSeries(id, dados);
+    resp.status(200).json({ mensagem: "Cliente atualizado com sucesso", id, dados });
+})
+
+endpoints.delete('/series/:id', async (req, resp) => {
+    let id = Number(req.params.id);
+    await cliente.deletarSeries(id);
+    resp.status(200).json({ mensagem: "Cliente removido", id });
+})
+
+endpoints.get('/series/:id', async (req, resp) => {
+    let id = Number(req.params.id);
+    let clienteId = await cliente.pesquisarSeriesId(id);
+    resp.status(200).json({ mensagem: "Busca concluída", resultado: clienteId });
+})
+
+endpoints.get('/series/filtros', async (req, resp) => {
+    let nome = req.query.nome;
+    let registros = await cliente.filtrarPorNomeS(nome);
+    resp.status(200).json({ filtro: nome, total: registros.length, dados: registros });
+})
+
 export default endpoints;
-
-
