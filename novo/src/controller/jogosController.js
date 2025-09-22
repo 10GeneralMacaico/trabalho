@@ -42,27 +42,28 @@ endpoints.get('/jogos/:id', async (req, resp) => {
 endpoints.put('/jogos/:id', async (req, resp) => {
     let id = Number(req.params.id);
     let dados = req.body;
-    await cliente.alterarClientes(id, dados);
+    await cliente.alterarJogos(id, dados);
     resp.status(200).json({ mensagem: "Cliente atualizado com sucesso", id, dados });
 })
 
 endpoints.delete('/jogos/:id', async (req, resp) => {
     let id = Number(req.params.id);
-    await cliente.deletarClientes(id);
+    await cliente.deletarJogos(id);
     resp.status(200).json({ mensagem: "Cliente removido", id });
 })
 
 endpoints.get('/jogos/:id', async (req, resp) => {
     let id = Number(req.params.id);
-    let clienteId = await cliente.pesquisarClientesId(id);
+    let clienteId = await cliente.pesquisarJogosId(id);
     resp.status(200).json({ mensagem: "Busca concluída", resultado: clienteId });
 })
 
 endpoints.get('/jogos/filtros', async (req, resp) => {
     let nome = req.query.nome;
-    let registros = await cliente.filtrarPorNomeC(nome);
+    let registros = await cliente.filtrarPorNomeJ(nome);
     resp.status(200).json({ filtro: nome, total: registros.length, dados: registros });
 })
 
 
 export default endpoints;
+
