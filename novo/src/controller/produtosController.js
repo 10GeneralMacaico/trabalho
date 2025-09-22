@@ -60,8 +60,9 @@ endpoints.get('/produtos/:id', async (req, resp) => {
 
 endpoints.get('/produtos/filtros', async (req, resp) => {
     let nome = req.query.nome;
-    let registros = await cliente.filtrarPorNomeC(nome);
+    let registros = await cliente.filtrarPorNomeP(nome);
     resp.status(200).json({ filtro: nome, total: registros.length, dados: registros });
 })
 
 export default endpoints;
+
