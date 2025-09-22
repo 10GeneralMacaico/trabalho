@@ -42,19 +42,19 @@ endpoints.get('/produtos/:id', async (req, resp) => {
 endpoints.put('/produtos/:id', async (req, resp) => {
     let id = Number(req.params.id);
     let dados = req.body;
-    await cliente.alterarClientes(id, dados);
+    await cliente.alterarProdutos(id, dados);
     resp.status(200).json({ mensagem: "Cliente atualizado com sucesso", id, dados });
 })
 
 endpoints.delete('/produtos/:id', async (req, resp) => {
     let id = Number(req.params.id);
-    await cliente.deletarClientes(id);
+    await cliente.deletarProdutos(id);
     resp.status(200).json({ mensagem: "Cliente removido", id });
 })
 
 endpoints.get('/produtos/:id', async (req, resp) => {
     let id = Number(req.params.id);
-    let clienteId = await cliente.pesquisarClientesId(id);
+    let clienteId = await cliente.pesquisarProdutosId(id);
     resp.status(200).json({ mensagem: "Busca concluída", resultado: clienteId });
 })
 
